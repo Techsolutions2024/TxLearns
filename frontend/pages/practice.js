@@ -28,7 +28,7 @@ export default function Practice() {
     formData.append('audio', blob, 'recording.webm');
     formData.append('transcript', 'The global economy is shifting rapidly due to technological advancements.');
 
-    const res = await fetch('http://localhost:3001/api/analyze', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/analyze`, {
       method: 'POST',
       body: formData
     });
@@ -46,11 +46,11 @@ export default function Practice() {
         className="bg-blue-600 text-white px-4 py-2 rounded"
         onClick={recording ? stopRecording : startRecording}
       >
-        {recording ? 'Dừng' : 'Bắt đầu ghi âm'}
+        {recording ? 'Dừng ghi' : 'Bắt đầu ghi âm'}
       </button>
       {feedback && (
         <div className="mt-6">
-          <h2 className="text-lg font-semibold">Phản hồi:</h2>
+          <h2 className="text-lg font-semibold">Phản hồi từ AI:</h2>
           <p className="mb-2">{feedback}</p>
           <audio controls src={feedbackAudio} />
         </div>
